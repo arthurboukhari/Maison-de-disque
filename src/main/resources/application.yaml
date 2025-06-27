@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:recordlabeldb
+    username: sa
+    password: password
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+
+  h2:
+    console:
+      enabled: true
+  
+  ai:
+    mistral:
+      api-key: ${MISTRAL_API_KEY:your-mistral-api-key-here}
+      chat:
+        options:
+          model: mistral-tiny
+          temperature: 0.7
+
+jwt:
+  secret: ${JWT_SECRET:VerySecretKeyForJWTGeneration123456789012345678901234567890}
+  expiration: 86400000 # 24 hours
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    com.label: DEBUG
+    org.springframework.security: DEBUG
